@@ -2,6 +2,8 @@ var filteredLocs = []
 
 var map;
 function initMap() {
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
     var canberra = {lat: -35.2809, lng: 149.1300};
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
@@ -194,6 +196,10 @@ function initMap() {
         center: canberra
     });
 
+directionsDisplay.setMap(map);
+//calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+
     var heatmapData = [];
     for (var i = 0; i < filteredLocs.length; i++) {
         var latLng = new google.maps.LatLng(filteredLocs[i]["LATITUDE"], filteredLocs[i]["LONGITUDE"]);
@@ -206,10 +212,32 @@ function initMap() {
     });
 }
 
-$.get('../data/data.json').done(data => {
-    filteredLocs = data.filter((loc) => {
-        return loc["DENSITY.HOUR"] < 100;
-    }).filter((loc) => {
-        return loc["Speed"] <= 50;
-    });
-}).always(initMap);
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    var waypoints = [];
+    waypoints.push({location: new google.maps.LatLng(-35.256011, 149.058001)})
+    waypoints.push({location: new google.maps.LatLng(-35.252013, 149.069788)})
+    waypoints.push({location: new google.maps.LatLng(-35.252264, 149.07259)})
+
+        directionsService.route({
+          origin: new google.maps.LatLng(-35.251218, 149.0601051),
+          destination: new google.maps.LatLng(-35.251218, 149.0601051),
+          travelMode: 'DRIVING',
+          waypoints: waypoints,
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+
+$.get('../data/data.json')
+  .done(data => {
+      filteredLocs = data.filter((loc) => {
+          return loc["DENSITY.HOUR"] < 100;
+      }).filter((loc) => {
+          return loc["Speed"] <= 50;
+      });
+  })
+  .always(initMap);
