@@ -1,0 +1,23 @@
+{
+  "name": "govhack2017",
+  "version": "1.0.0",
+  "description": "Repo for govhack2017 project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamWS/govhack2017.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamWS/govhack2017/issues"
+  },
+  "homepage": "https://github.com/SamWS/govhack2017#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1"
+  }
+}
