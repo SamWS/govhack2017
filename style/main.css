@@ -5,12 +5,12 @@ body {
 }
 
 .main-div {
-    width: 40%;
     margin: auto;
 }
 
 .ul-list-main {
     list-style: none;
+    padding: 0;
 }
 
 .ch-background {
@@ -39,4 +39,8 @@ body {
     border-radius: 50%;
     border: 2px solid #e6e6e6;
     color: #e6e6e6;
+}
+
+.begin-btn {
+    border: 1px solid e6e6e6;
 }
