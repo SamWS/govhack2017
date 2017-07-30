@@ -261,7 +261,7 @@ function initMap() {
  
 
         // Construct the polygon.
-        var macquariePoly = new google.maps.Polygon({
+        var canberraPoly = new google.maps.Polygon({
           paths: [macquarie, duffy, forrest],
           strokeColor: '#FF0000',
           strokeOpacity: 0.8,
@@ -269,40 +269,46 @@ function initMap() {
           fillColor: '#FF0000',
           fillOpacity: 0.35
         });
-        macquariePoly.setMap(map);
+        canberraPoly.setMap(map);
 
+
+  google.maps.event.addListener(canberraPoly, 'click', function (event) {
+      directionsDisplay.setMap(map);
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+      canberraPoly.setMap(null)
+  });  
 ///// marker adding
-  var marker, i;
-  var markers = [];
+  // var marker, i;
+  // var markers = [];
 
-  function makeMarkers() {
-    for (i = 0; i < filteredLocs.length; i++) {  
-      marker = new google.maps.Marker({
-          position: new google.maps.LatLng(filteredLocs[i]["LATITUDE"], filteredLocs[i]["LONGITUDE"]),
-          map: map
-      });
+  // function makeMarkers() {
+  //   for (i = 0; i < filteredLocs.length; i++) {  
+  //     marker = new google.maps.Marker({
+  //         position: new google.maps.LatLng(filteredLocs[i]["LATITUDE"], filteredLocs[i]["LONGITUDE"]),
+  //         map: map
+  //     });
 
-      var contentString = "<div>" + filteredLocs[i]["Speed"] + "</div>"
+  //     var contentString = "<div>" + filteredLocs[i]["Speed"] + "</div>"
 
-      var infowindow = new google.maps.InfoWindow();
+  //     var infowindow = new google.maps.InfoWindow();
 
-      google.maps.event.addListener(marker, "click", (function(marker,content,infowindow){ 
-        return function() {
-          infowindow.setContent(content);
-          infowindow.open(map,marker);
-        };
-      })(marker,contentString,infowindow)); 
+  //     google.maps.event.addListener(marker, "click", (function(marker,content,infowindow){ 
+  //       return function() {
+  //         infowindow.setContent(content);
+  //         infowindow.open(map,marker);
+  //       };
+  //     })(marker,contentString,infowindow)); 
 
-    }
-    markers.push(marker)
-  }
+  //   }
+  //   markers.push(marker)
+  // }
 
 //// remove markers
-  function removeMarkers() {
-      for (i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-      }
-    }
+  // function removeMarkers() {
+  //     for (i = 0; i < markers.length; i++) {
+  //       markers[i].setMap(null);
+  //     }
+  //   }
 
   //////heatmap stuff
 
@@ -317,17 +323,17 @@ function initMap() {
     //     map: map
     // });
 
-  google.maps.event.addListener(map, 'zoom_changed', function() {
-    var zoom = map.getZoom();
-    if (zoom > 13) {
-      makeMarkers();
-      heatmap.setMap(null);
-    } else {
-      // hide the markers, show the heatmap
-      heatmap.setMap(map);
-      removeMarkers();
-    }
-  })
+  // google.maps.event.addListener(map, 'zoom_changed', function() {
+  //   var zoom = map.getZoom();
+  //   if (zoom > 13) {
+  //     makeMarkers();
+  //     heatmap.setMap(null);
+  //   } else {
+  //     // hide the markers, show the heatmap
+  //     heatmap.setMap(map);
+  //     removeMarkers();
+  //   }
+  // })
 }
 
 
