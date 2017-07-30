@@ -14,5 +14,23 @@
 
 .cb-background {
     background-color: #6589A8;
-    color: white;
+    color: #e6e6e6;
+}
+
+#completed-task {
+    background-color: #009900;
+}
+
+#btn-circle-completed {
+    background-color: #009900;
+}
+
+#completed-body {
+    border: 2px solid #009900;
+}
+
+.btn-list-circle {
+    border-radius: 50%;
+    border: 2px solid #e6e6e6;
+    color: #e6e6e6;
 }
