@@ -1,7 +1,7 @@
 var filteredLocs = []
 
 var map;
-function initMap() {
+window.initMap = function initMap() {
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
     var canberra = {lat: -35.2809, lng: 149.1300};
@@ -359,12 +359,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       }
 
 
-$.get('../data/data.json')
-  .done(data => {
-      filteredLocs = data.filter((loc) => {
-          return loc["DENSITY.HOUR"] < 100;
-      }).filter((loc) => {
-          return loc["Speed"] <= 50;
-      });
-  })
-  .always(initMap);
+
+filteredLocs = window.data.filter((loc) => {
+    return loc["DENSITY.HOUR"] < 100;
+}).filter((loc) => {
+    return loc["Speed"] <= 50;
+});
